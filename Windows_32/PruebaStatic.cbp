@@ -34,35 +34,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Archivo.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Archivo.h" />
 		<Unit filename="ArrayList.h" />
 		<Unit filename="Employee.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Employee.h" />
-		<Unit filename="General.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="General.h" />
-		<Unit filename="ManejoError.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="ManejoError.h" />
-		<Unit filename="Menu.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Menu.h" />
-		<Unit filename="Parser.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Parser.h" />
-		<Unit filename="Parser.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="parser.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="parser.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

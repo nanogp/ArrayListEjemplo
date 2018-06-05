@@ -79,3 +79,66 @@
 	"ArrayList.h"
 	"Employee.h"
 
+1528238821 source:d:\github\arraylistejemplo\windows_64\employee.c
+	"ArrayList.h"
+	"Employee.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1527887774 d:\github\arraylistejemplo\windows_64\arraylist.h
+
+1528238752 d:\github\arraylistejemplo\windows_64\employee.h
+	"General.h"
+	"Menu.h"
+
+1528219817 d:\github\arraylistejemplo\windows_64\general.h
+
+1527906387 d:\github\arraylistejemplo\windows_64\menu.h
+
+1528235769 source:d:\github\arraylistejemplo\windows_64\parser.c
+	"Parser.h"
+	"ArrayList.h"
+	"Employee.h"
+	"Archivo.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1528228688 source:d:\github\arraylistejemplo\windows_64\archivo.c
+	"Archivo.h"
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
+1528235585 d:\github\arraylistejemplo\windows_64\archivo.h
+	<stdio.h>
+
+1528219746 source:d:\github\arraylistejemplo\windows_64\general.c
+	"General.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1528238667 source:d:\github\arraylistejemplo\windows_64\main.c
+	"General.h"
+	"Menu.h"
+	"Archivo.h"
+	"ArrayList.h"
+	"Employee.h"
+	"Parser.h"
+	<stdio.h>
+	<stdlib.h>
+
+1528235781 d:\github\arraylistejemplo\windows_64\parser.h
+	"General.h"
+	"ArrayList.h"
+	<stdio.h>
+
+1528227486 source:d:\github\arraylistejemplo\windows_64\manejoerror.c
+
+1527780918 source:d:\github\arraylistejemplo\windows_64\menu.c
+	"Menu.h"
+	"General.h"
+	<stdio.h>
+

@@ -1,79 +1,94 @@
-#include <stdio.h>
-#include <stdlib.h>
+/**************************** INCLUSION DE LIBRERIAS PERSONALES **********************************/
+#include "General.h"
+#include "Menu.h"
+#include "Archivo.h"
 #include "ArrayList.h"
 #include "Employee.h"
-#include "d:\github\TP3\TP3\General.h"
-#include "d:\github\TP3\TP3\General.c"
+#include "Parser.h"
 
-/****************************************************
-    Menu:
-        1. Parse del archivo data.csv
-        2. Listar Empleados
-        3. Ordenar por nombre
-        4. Agregar un elemento
-        5. Elimina un elemento
-        6. Listar Empleados (Desde/Hasta)
-*****************************************************/
 
-int charToInt(char* cadena)
-{
-   int retorno = NULL;
+/**************************** INCLUSION DE LIBRERIAS ESTANDAR ************************************/
+#include <stdio.h>
+#include <stdlib.h>
 
-   sprintf(cadena, "%d", retorno);
-
-   return retorno;
-}
-
-int charToIsEmpty(char* cadena)
-{
-    int retorno = OCCUPY;
-
-    if(stricmp(cadena,TRUE) == EMPTY)
-    {
-        retorno = EMPTY;
-    }
-
-    return retorno;
-}
+/**************************** MENUS **************************************************************/
+#define MAIN_MENU_TITULO "ARRAY LIST"
+#define MAIN_MENU_CANT 8
+#define MAIN_MENU_DETALLE1  "1. Parse del archivo data.csv"
+#define MAIN_MENU_DETALLE2  "2. Listar Empleados"
+#define MAIN_MENU_DETALLE3  "3. Ordenar por nombre"
+#define MAIN_MENU_DETALLE4  "4. Agregar un elemento"
+#define MAIN_MENU_DETALLE5  "5. Elimina un elemento"
+#define MAIN_MENU_DETALLE6  "6. Listar Empleados (Desde/Hasta)"
+#define MAIN_MENU_DETALLE7  "7. Listar Empleados Con Vacios"
+#define MAIN_MENU_DETALLE0  "0. Salir"
 
 int main()
 {
-    ArrayList* empleados;
-    Employee unEmpleado;
-    char auxId[10];
-    char auxIsEmpty[10];
-    FILE* pArchivo;
+   eMenu menuPrincipal = {/*titulo del menu*/{MAIN_MENU_TITULO},
+                          /*cantidad de opciones*/MAIN_MENU_CANT,
+                          /*codigos*/{1,2,3,4,5,6,7,0},
+                          /*descripciones*/{MAIN_MENU_DETALLE1,
+                                            MAIN_MENU_DETALLE2,
+                                            MAIN_MENU_DETALLE3,
+                                            MAIN_MENU_DETALLE4,
+                                            MAIN_MENU_DETALLE5,
+                                            MAIN_MENU_DETALLE6,
+                                            MAIN_MENU_DETALLE7,
+                                            MAIN_MENU_DETALLE0}};
+   int opcion;
+   char salirDelPrograma = 'N';
 
-    empleados = al_newArrayList();
 
-    pArchivo = fopen("data.csv", "r");
-    if(pArchivo == NULL)
-    {
-        printf("\nNo se pudo abrir el archivo");
-    }
-    else
-    {
-        //primera falsa lectura
-        fscanf(pArchivo, "%[^,],%[^,],%[^,],%[^\n]\n", auxId, (char*)&unEmpleado.name, (char*)&unEmpleado.lastName, auxIsEmpty);
+   /************************* ARRAYS DE ESTRUCTURAS **********************************************/
+   ArrayList* empleados;
 
-        do
-        {
-            fscanf(pArchivo, "%[^,],%[^,],%[^,],%[^\n]\n", auxId, (char*)&unEmpleado.name, (char*)&unEmpleado.lastName, auxIsEmpty);
+   /************************* INICIALIZACION *****************************************************/
+   empleados = al_newArrayList();
 
-            employee_setId(&unEmpleado, charToInt(auxId));
-            employee_setIsEmpty(&unEmpleado, charToIsEmpty(auxIsEmpty));
+   /************************* GENERA DATOS POR HARDCODE PARA DEBUG *******************************/
+   /************************* (SOLO SI EL ARCHIVO BINARIO NO EXISTE) *****************************/
 
-            al_add(empleados, &unEmpleado);
+   do
+   {
+      /********************** MENU PRINCIPAL *****************************************************/
+      ejecutarEnConsola(LIMPIAR_PANTALLA);
+      opcion = pedirOpcion(&menuPrincipal);
+      switch(opcion)
+      {
+         case 1:
+            /**************** EMPLOYEE PARSE *****************************************************/
+            eEmployee_gestionParsear(empleados);
+            break;
+         case 2:
+            /**************** EMPLOYEE LISTAR ****************************************************/
+            eEmployee_gestionListar(empleados);
+            break;
+         case 3:
+            /**************** EMPLOYEE ORDENAR ***************************************************/
+            eEmployee_gestionOrdenar(empleados);
+            break;
+         case 4:
+            /**************** EMPLOYEE ALTA ******************************************************/
+            eEmployee_gestionAlta(empleados);
+            break;
+         case 5:
+            /**************** EMPLOYEE BAJA ******************************************************/
+            break;
+         case 6:
+            /**************** EMPLOYEE LISTAR DESDE/HASTA ****************************************/
+            break;
+         case 7:
+            /**************** EMPLOYEE LISTAR CON VACIOS *****************************************/
+            eEmployee_printListWithEmpty(empleados);pausa();
+            break;
+         case 0:
+            /************ SALIR DEL PROGRAMA *****************************************************/
+            salirDelPrograma = pedirConfirmacion(MSJ_SALIR_DEL_PROGRAMA);
+            break;
+      }
 
-        }while(!feof(pArchivo));
-    }
-    fclose(pArchivo);
-
-    for(int i=0 ; i<al_len(empleados);i++)
-    {
-        employee_print(al_get(empleados,i));
-        //printf(" i:%d",i);
-    }
-
-    return 0;
+   }
+   while(salirDelPrograma == 'N');
+   return 0;
 }
