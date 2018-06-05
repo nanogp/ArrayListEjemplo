@@ -59,6 +59,37 @@ int eEmployee_nextId(ArrayList* this)
    return (id++);
 }
 //-----------------------------------------------------------------------------------------------//
+int eEmployee_searchById(ArrayList* this, int id)
+{
+   int pos;
+
+   for(int i=0; i<al_len(this) ; i++)
+   {
+      if(((eEmployee*)al_get(this, i))->id == id)
+      {
+         id = al_
+      }
+   }
+
+   return pos;
+}
+//-----------------------------------------------------------------------------------------------//
+eEmployee* eEmployee_getById(ArrayList* this)
+{
+   eEmployee* unEmpleado;
+
+   for(int i=0; i<al_len(this) ; i++)
+   {
+      unEmpleado = al_get(this, i);
+
+      if(eEmployee_getId(unEmpleado) == id)
+      {
+         id = al_
+      }
+   }
+   return unEmpleado;
+}
+//-----------------------------------------------------------------------------------------------//
 
 
 /**************************** GET Y SET **********************************************************/
@@ -338,18 +369,17 @@ int eEmployee_gestionBaja(ArrayList* this)
    {
       limpiarPantallaYMostrarTitulo(EMPLOYEE_BAJA_TITULO);
 
-      unEmpleado = eEmployee_pedirIdYBuscar(this);
+      unEmpleado = eEmployee_getById(this);
 
       limpiarPantallaYMostrarTitulo(EMPLOYEE_BAJA_TITULO);
-      imprimirEnPantalla(EMPLOYEE_MOSTRAR_UNO_CABECERA);
-      eEmployee_mostrarUno(unEmpleado);
+      imprimirEnPantalla(EMPLOYEE_PRINT_MASK_CABECERA);
+      eEmployee_print(unEmpleado);
 
       confirmacion = pedirConfirmacion(EMPLOYEE_MSJ_CONFIRMAR_BAJA);
 
       if(confirmacion == 'S')
       {
-         idPelicula = (listadoPeliculas+posicion)->idPelicula;
-         (listadoPeliculas+posicion)->estado = LIBRE;
+         eEmployee_setIsEmpty(unEmpleado, EMPLOYEE_EMPTY);
          imprimirEnPantalla(EMPLOYEE_MSJ_BAJA_OK);
       }
       else

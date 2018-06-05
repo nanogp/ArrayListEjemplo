@@ -124,11 +124,9 @@ int eEmployee_informarListadoVacio(ArrayList* this);
 //-----------------------------------------------------------------------------------------------//
 int eEmployee_nextId(ArrayList* this);
 //-----------------------------------------------------------------------------------------------//
-int eEmployee_buscarPorId(ArrayList* this, int idEmployee);
+int eEmployee_searchById(ArrayList* this, int id);
 //-----------------------------------------------------------------------------------------------//
-int eEmployee_pedirIdYBuscar(ArrayList* this);
-//-----------------------------------------------------------------------------------------------//
-int eEmployee_obtenerCantidadElementos(ArrayList* this);
+eEmployee* eEmployee_getById(ArrayList* this);
 //-----------------------------------------------------------------------------------------------//
 
 
