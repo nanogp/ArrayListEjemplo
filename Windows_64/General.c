@@ -85,10 +85,24 @@ int pedirIntValido(char* mensajeIngreso, char* mensajeReingreso, int limiteInfer
 
    while(retorno < limiteInferior || retorno > limiteSuperior)
    {
-      retorno = pedirFloat(mensajeReingreso);
+      retorno = pedirInt(mensajeReingreso);
    }
 
    return retorno;
+}
+//-----------------------------------------------------------------------------------------------//
+void pedirRangoIntValido(char* mensajeIngreso, char* mensajeReingreso, int limiteInferior, int limiteSuperior, int* desde, int* hasta)
+{
+   *desde = pedirIntValido(mensajeIngreso, mensajeReingreso, limiteInferior, limiteSuperior);
+   *hasta = pedirIntValido(mensajeIngreso, mensajeReingreso, limiteInferior, limiteSuperior);
+
+   while(*desde > *hasta)
+   {
+      printf(MSJ_RANGO_INVALIDO_ERROR, *desde, *hasta);
+      *desde = pedirIntValido(mensajeIngreso, mensajeReingreso, limiteInferior, limiteSuperior);
+      *hasta = pedirIntValido(mensajeIngreso, mensajeReingreso, limiteInferior, limiteSuperior);
+   }
+
 }
 //-----------------------------------------------------------------------------------------------//
 float pedirFloat(char* mensajeIngreso)

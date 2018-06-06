@@ -48,7 +48,7 @@ int eEmployee_informarListadoVacio(ArrayList* this)
 int eEmployee_nextId(ArrayList* this)
 {
    eEmployee* unEmpleado;
-   int id = 1;
+   int id = 0;
 
    for(int i=0; i<al_len(this); i++)
    {
@@ -60,7 +60,7 @@ int eEmployee_nextId(ArrayList* this)
       }
    }
 
-   return (id++);
+   return (id+1);
 }
 //-----------------------------------------------------------------------------------------------//
 eEmployee* eEmployee_getById(ArrayList* this, int id)
@@ -90,7 +90,7 @@ eEmployee* eEmployee_searchById(ArrayList* this)
 
    do
    {
-      limpiarPantallaYMostrarTitulo(EMPLOYEE_LISTADO_TITULO);
+      imprimirTitulo(EMPLOYEE_LISTADO_TITULO);
       eEmployee_printList(this, EMPLOYEE_PRINT_PAGESIZE);
       id = eEmployee_pedirId();
       unEmpleado = eEmployee_getById(this, id);
@@ -307,6 +307,35 @@ void eEmployee_printList(ArrayList* this, int pageSize)
          }
       }
    }
+   printf(EMPLOYEE_LISTADO_RECUENTO,contador);
+}
+//-----------------------------------------------------------------------------------------------//
+void eEmployee_printListFromTo(ArrayList* this, int idFrom, int idTo, int pageSize)
+{
+   eEmployee* empleado;
+   int contador = 0;
+
+   imprimirEnPantalla(EMPLOYEE_PRINT_MASK_CABECERA);
+
+   for(int i=0 ; i<al_len(this) ; i++)
+   {
+      empleado = al_get(this,i);
+
+      if(eEmployee_getIsEmpty(empleado) != EMPLOYEE_EMPTY &&
+         eEmployee_getId(empleado) > idFrom &&
+         eEmployee_getId(empleado) < idTo)
+      {
+         eEmployee_print(empleado);
+         contador++;
+
+         if(contador%pageSize == 0)
+         {
+            pausa();
+            imprimirEnPantalla(EMPLOYEE_PRINT_MASK_CABECERA);
+         }
+      }
+   }
+   printf(EMPLOYEE_LISTADO_RECUENTO,contador);
 }
 //-----------------------------------------------------------------------------------------------//
 void eEmployee_printListWithEmpty(ArrayList* this)
@@ -331,6 +360,7 @@ void eEmployee_printListWithEmpty(ArrayList* this)
          imprimirEnPantalla(EMPLOYEE_PRINT_MASK_CABECERA);
       }
    }
+   printf(EMPLOYEE_LISTADO_RECUENTO,contador);
 }
 //-----------------------------------------------------------------------------------------------//
 
@@ -428,7 +458,29 @@ void eEmployee_gestionListar(ArrayList* this)
    {
       eEmployee_printList(this, EMPLOYEE_PRINT_PAGESIZE);
    }
-   printf(EMPLOYEE_LISTADO_RECUENTO,al_len(this));
+   pausa();
+}
+//-----------------------------------------------------------------------------------------------//
+void eEmployee_gestionListarDesdeHasta(ArrayList* this)
+{
+   int desde;
+   int hasta;
+
+   limpiarPantallaYMostrarTitulo(EMPLOYEE_LISTADO_RANGO_TITULO);
+
+   if(!eEmployee_informarListadoVacio(this))
+   {
+      imprimirEnPantalla(EMPLOYEE_LISTADO_RANGO_INGRESO);
+      pedirRangoIntValido(EMPLOYEE_MSJ_INGRESE_ID,
+                          EMPLOYEE_MSJ_REINGRESE_ID,
+                          EMPLOYEE_ID_MIN,
+                          EMPLOYEE_ID_MAX,
+                          &desde,
+                          &hasta);
+
+      limpiarPantallaYMostrarTitulo(EMPLOYEE_LISTADO_RANGO_TITULO);
+      eEmployee_printListFromTo(this, desde, hasta, EMPLOYEE_PRINT_PAGESIZE);
+   }
    pausa();
 }
 //-----------------------------------------------------------------------------------------------//

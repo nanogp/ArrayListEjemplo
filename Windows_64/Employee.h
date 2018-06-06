@@ -10,8 +10,8 @@
 /**************************** CONSTANTES *********************************************************/
 #define EMPLOYEE_EMPTY 1
 #define EMPLOYEE_OCCUPIED 0
-#define EMPLOYEE_EMPTY_LEGEND "Empty"
-#define EMPLOYEE_OCCUPIED_LEGEND "Occupied"
+#define EMPLOYEE_EMPTY_LEGEND "Vacio"
+#define EMPLOYEE_OCCUPIED_LEGEND "Ocupado"
 #define TRUE "true"
 #define FALSE "false"
 #define EMPLOYEE_PRINT_PAGESIZE 1000
@@ -33,6 +33,7 @@
 #define EMPLOYEE_BAJA_TITULO "BAJA DE EMPLOYEE"
 #define EMPLOYEE_MODIFICACION_TITULO "MODIFICACION DE EMPLOYEE"
 #define EMPLOYEE_LISTADO_TITULO "LISTADO DE EMPLOYEES"
+#define EMPLOYEE_LISTADO_RANGO_TITULO "LISTADO DE EMPLOYEES POR RANGO"
 #define EMPLOYEE_ORDEN_TITULO "ORDEN DE EMPLOYEES"
 #define EMPLOYEE_PARSEO_TITULO "PARSEO ARCHIVO CSV DE EMPLOYEES"
 
@@ -53,6 +54,7 @@
 #define EMPLOYEE_MSJ_REGISTRO_ACTUAL "\n\nREGISTRO DE EMPLOYEE ACTUAL:\n----------------------------"
 #define EMPLOYEE_MSJ_REGISTRO_MODIFICADO "\n\nREGISTRO MODIFICADO:\n--------------------"
 #define EMPLOYEE_MSJ_ORDEN_OK "\n\nSe ordeno listado por nombre"
+#define EMPLOYEE_LISTADO_RANGO_INGRESO "\n\nSe deben ingresar los ID desde y hasta\n--------------------------------------"
 
 /**************************** MENSAJES INPUT *****************************************************/
 #define EMPLOYEE_MSJ_INGRESE_ID "\n\nIngrese el ID de Employee: "
@@ -60,7 +62,7 @@
 #define EMPLOYEE_MSJ_INGRESE_APELLIDO "\nIngrese Apellido: "
 
 /**************************** LISTADOS ***********************************************************/
-#define EMPLOYEE_PRINT_MASK_CABECERA "\nID \t- NOMBRE \t\t- APELLIDO \t\t- ES VACIO"
+#define EMPLOYEE_PRINT_MASK_CABECERA "\nID \t NOMBRE \t\t APELLIDO \t\t ES VACIO\n-- \t ------ \t\t -------- \t\t --------"
 
 /**************************** ORDENAMIENTO *******************************************************/
 #define EMPLOYEE_ORDEN_ASC 1
@@ -149,6 +151,8 @@ void eEmployee_print(eEmployee* this);
 //-----------------------------------------------------------------------------------------------//
 void eEmployee_printList(ArrayList* this, int pageSize);
 //-----------------------------------------------------------------------------------------------//
+void eEmployee_printListFromTo(ArrayList* this, int idFrom, int idTo, int pageSize);
+//-----------------------------------------------------------------------------------------------//
 void eEmployee_printListWithEmpty(ArrayList* this);
 //-----------------------------------------------------------------------------------------------//
 
@@ -159,6 +163,8 @@ void eEmployee_delete(eEmployee* this);
 void eEmployee_gestionParsear(ArrayList* this);
 //-----------------------------------------------------------------------------------------------//
 void eEmployee_gestionListar(ArrayList* this);
+//-----------------------------------------------------------------------------------------------//
+void eEmployee_gestionListarDesdeHasta(ArrayList* this);
 //-----------------------------------------------------------------------------------------------//
 void eEmployee_gestionOrdenar(ArrayList* this);
 //-----------------------------------------------------------------------------------------------//

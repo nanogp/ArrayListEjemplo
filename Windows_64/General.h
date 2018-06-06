@@ -28,6 +28,8 @@
 
 /**************************** MENSAJES ERROR *****************************************************/
 #define MSJ_MALLOC_STRING_ERROR "\nNo se pudo asignar memoria para el texto solicitado"
+#define MSJ_FUERA_DE_RANGO_ERROR "\nEl valor ingresado esta fuera del rango %d a %d"
+#define MSJ_RANGO_INVALIDO_ERROR "\nEl rango %d a %d no es valido"
 
 /**************************** BUSQUEDA ***********************************************************/
 /** \brief busca coincidencia de un valor entero dentro de un array
@@ -76,6 +78,19 @@ int pedirInt(char*);
  *
  */
 int pedirIntValido(char*, char*, int, int);
+//-----------------------------------------------------------------------------------------------//
+/** \brief pide que se ingrese un numero int y lo valida
+ *
+  * \param mensajeIngreso char* : el mensaje al usuario
+  * \param mensajeReingreso char* : el mensaje al usuario en caso de error
+ * \param limiteInferior int: el valor inferior permitido
+ * \param limiteSuperior int: el valor superior permitido
+ * \param desde int*: devuelve desde válido
+ * \param hasta int*: devuelve hasta válido
+ * \return void
+ *
+ */
+void pedirRangoIntValido(char*, char*, int, int, int*, int*);
 //-----------------------------------------------------------------------------------------------//
 /** \brief pide que se ingrese un numero float
  *
