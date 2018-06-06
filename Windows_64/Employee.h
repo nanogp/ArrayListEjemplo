@@ -26,6 +26,7 @@
 /**************************** MASCARAS ***********************************************************/
 #define EMPLOYEE_PRINT_MASK "\n%d \t %-20s \t %-20s \t %s"
 #define EMPLOYEE_PARSE_MASK "%[^,],%[^,],%[^,],%[^\n]\n"
+#define EMPLOYEE_LISTADO_RECUENTO "\n%d registros."
 
 /**************************** TITULOS ************************************************************/
 #define EMPLOYEE_ALTA_TITULO "ALTA DE EMPLOYEE"
@@ -60,7 +61,6 @@
 
 /**************************** LISTADOS ***********************************************************/
 #define EMPLOYEE_PRINT_MASK_CABECERA "\nID \t- NOMBRE \t\t- APELLIDO \t\t- ES VACIO"
-
 
 /**************************** ORDENAMIENTO *******************************************************/
 #define EMPLOYEE_ORDEN_ASC 1
@@ -124,9 +124,9 @@ int eEmployee_informarListadoVacio(ArrayList* this);
 //-----------------------------------------------------------------------------------------------//
 int eEmployee_nextId(ArrayList* this);
 //-----------------------------------------------------------------------------------------------//
-int eEmployee_searchById(ArrayList* this, int id);
+eEmployee* eEmployee_getById(ArrayList* this, int id);
 //-----------------------------------------------------------------------------------------------//
-eEmployee* eEmployee_getById(ArrayList* this);
+eEmployee* eEmployee_searchById(ArrayList* this);
 //-----------------------------------------------------------------------------------------------//
 
 
