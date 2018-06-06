@@ -67,15 +67,17 @@ int parserEmployee(FILE* pFile, ArrayList* pArrayListEmployee)
 void eEmployee_gestionParsear(ArrayList* this)
 {
    FILE* pArchivo;
+   int beforeCount;
 
    limpiarPantallaYMostrarTitulo(EMPLOYEE_PARSEO_TITULO);
 
    pArchivo = eArchivoTexto_abrir(ARCHIVO_TEXTO_NOMBRE);
    if(pArchivo != NULL)
    {
+      beforeCount = al_len(this);
       parserEmployee(pArchivo, this);
       eArchivoTexto_cerrar(pArchivo);
-      printf(PARSER_OK_MASK, al_len(this));
+      printf(PARSER_OK_MASK, al_len(this)-beforeCount);
    }
    else
    {

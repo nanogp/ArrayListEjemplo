@@ -74,6 +74,7 @@ int main()
             break;
          case 5:
             /**************** EMPLOYEE BAJA ******************************************************/
+            eEmployee_gestionBaja(empleados);
             break;
          case 6:
             /**************** EMPLOYEE LISTAR DESDE/HASTA ****************************************/

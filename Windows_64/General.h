@@ -13,7 +13,11 @@
 
 /**************************** CONSTANTES *********************************************************/
 #define OCUPADO 1
-#define LIBRE 0
+#define VACIO 0
+#define SIN_ERROR 0
+#define VERIFICAR_PUNTEROS -1
+#define VERIFICAR_SI_HAY_LUGAR -2
+#define VERIFICAR_SI_ESTA_VACIO -3
 
 /**************************** MENSAJES INFO ******************************************************/
 #define MSJ_CONFIRMA_CORRECTOS "Confirma que los datos ingresados son correctos?"

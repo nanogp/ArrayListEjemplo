@@ -10,23 +10,27 @@
 /**************************** BUSQUEDA ***********************************************************/
 int eEmployee_estaVacio(ArrayList* this)
 {
-   int returnAux = 1;
+   int returnAux = VERIFICAR_PUNTEROS;
 
-   for(int i=0 ; i<al_len(this); i++)
+   if(this != NULL)
    {
-      if(eEmployee_getIsEmpty(al_get(this,i)) == EMPLOYEE_OCCUPIED)
+      returnAux = OCUPADO;
+      for(int i=0 ; i<al_len(this); i++)
       {
-         returnAux = 0;
-         break;
+         if(eEmployee_getIsEmpty(al_get(this,i)) == EMPLOYEE_OCCUPIED)
+         {
+            returnAux = VACIO;
+            break;
+         }
       }
-   }
 
+   }
    return returnAux;
 }
 //-----------------------------------------------------------------------------------------------//
 int eEmployee_informarListadoVacio(ArrayList* this)
 {
-   int returnAux = -1;
+   int returnAux = VERIFICAR_PUNTEROS;
 
    if(this != NULL)
    {
@@ -59,22 +63,7 @@ int eEmployee_nextId(ArrayList* this)
    return (id++);
 }
 //-----------------------------------------------------------------------------------------------//
-int eEmployee_searchById(ArrayList* this, int id)
-{
-   int pos;
-
-   for(int i=0; i<al_len(this) ; i++)
-   {
-      if(((eEmployee*)al_get(this, i))->id == id)
-      {
-         id = al_
-      }
-   }
-
-   return pos;
-}
-//-----------------------------------------------------------------------------------------------//
-eEmployee* eEmployee_getById(ArrayList* this)
+eEmployee* eEmployee_getById(ArrayList* this, int id)
 {
    eEmployee* unEmpleado;
 
@@ -84,9 +73,36 @@ eEmployee* eEmployee_getById(ArrayList* this)
 
       if(eEmployee_getId(unEmpleado) == id)
       {
-         id = al_
+         break;
+      }
+      else
+      {
+         unEmpleado = NULL;
       }
    }
+   return unEmpleado;
+}
+//-----------------------------------------------------------------------------------------------//
+eEmployee* eEmployee_searchById(ArrayList* this)
+{
+   eEmployee* unEmpleado;
+   int id;
+
+   do
+   {
+      limpiarPantallaYMostrarTitulo(EMPLOYEE_LISTADO_TITULO);
+      eEmployee_printList(this, EMPLOYEE_PRINT_PAGESIZE);
+      id = eEmployee_pedirId();
+      unEmpleado = eEmployee_getById(this, id);
+
+      if(unEmpleado == NULL)
+      {
+         imprimirEnPantalla(EMPLOYEE_MSJ_ID_NO_EXISTE);
+         pausa();
+      }
+   }
+   while(unEmpleado == NULL);
+
    return unEmpleado;
 }
 //-----------------------------------------------------------------------------------------------//
@@ -95,7 +111,7 @@ eEmployee* eEmployee_getById(ArrayList* this)
 /**************************** GET Y SET **********************************************************/
 int eEmployee_getId(eEmployee* this)
 {
-    int returnAux = -1;
+    int returnAux = VERIFICAR_PUNTEROS;
     if(this != NULL)
     {
         returnAux = this->id;
@@ -105,7 +121,7 @@ int eEmployee_getId(eEmployee* this)
 //-----------------------------------------------------------------------------------------------//
 int eEmployee_getIsEmpty(eEmployee* this)
 {
-    int returnAux = -1;
+    int returnAux = VERIFICAR_PUNTEROS;
     if(this != NULL)
     {
         returnAux = this->isEmpty;
@@ -154,10 +170,10 @@ char* eEmployee_getLastName(eEmployee* this)
 //-----------------------------------------------------------------------------------------------//
 int eEmployee_setId(eEmployee* this, int id)
 {
-    int returnAux = -1;
+    int returnAux = VERIFICAR_PUNTEROS;
     if(this != NULL)
     {
-        returnAux = 0;
+        returnAux = SIN_ERROR;
         this->id = id;
     }
     return returnAux;
@@ -165,10 +181,10 @@ int eEmployee_setId(eEmployee* this, int id)
 //-----------------------------------------------------------------------------------------------//
 int eEmployee_setIsEmpty(eEmployee* this, int isEmpty)
 {
-    int returnAux = -1;
+    int returnAux = VERIFICAR_PUNTEROS;
     if(this != NULL)
     {
-        returnAux = 0;
+        returnAux = SIN_ERROR;
         this->isEmpty = isEmpty;
     }
     return returnAux;
@@ -176,10 +192,10 @@ int eEmployee_setIsEmpty(eEmployee* this, int isEmpty)
 //-----------------------------------------------------------------------------------------------//
 int eEmployee_setName(eEmployee* this, char* name)
 {
-    int returnAux = -1;
+    int returnAux = VERIFICAR_PUNTEROS;
     if(this != NULL)
     {
-        returnAux = 0;
+        returnAux = SIN_ERROR;
         strcpy(this->name, name);
     }
     return returnAux;
@@ -187,10 +203,10 @@ int eEmployee_setName(eEmployee* this, char* name)
 //-----------------------------------------------------------------------------------------------//
 int eEmployee_setLastName(eEmployee* this, char* lastName)
 {
-    int returnAux = -1;
+    int returnAux = VERIFICAR_PUNTEROS;
     if(this != NULL)
     {
-        returnAux = 0;
+        returnAux = SIN_ERROR;
         strcpy(this->lastName, lastName);
     }
     return returnAux;
@@ -322,13 +338,13 @@ void eEmployee_printListWithEmpty(ArrayList* this)
 /**************************** ALTA DE REGISTRO ***************************************************/
 int eEmployee_gestionAlta(ArrayList* this)
 {
-   int returnAux = -1;
+   int returnAux = VERIFICAR_PUNTEROS;
    eEmployee* registro;
    char confirmacion;
 
    if(this != NULL)
    {
-      returnAux = 0;
+      returnAux = SIN_ERROR;
       limpiarPantallaYMostrarTitulo(EMPLOYEE_ALTA_TITULO);
 
       registro = eEmployee_pedirIngreso(this);
@@ -358,38 +374,42 @@ int eEmployee_gestionAlta(ArrayList* this)
 /**************************** BAJA DE REGISTRO ****************************************************/
 int eEmployee_gestionBaja(ArrayList* this)
 {
+   int returnAux = VERIFICAR_PUNTEROS;
    eEmployee* unEmpleado;
    char confirmacion;
-   int posicion;
-   int id;
 
-   limpiarPantallaYMostrarTitulo(EMPLOYEE_BAJA_TITULO);
-
-   if(!eEmployee_informarListadoVacio(this))
+   if(this != NULL)
    {
+      returnAux = VERIFICAR_SI_ESTA_VACIO;
       limpiarPantallaYMostrarTitulo(EMPLOYEE_BAJA_TITULO);
 
-      unEmpleado = eEmployee_getById(this);
-
-      limpiarPantallaYMostrarTitulo(EMPLOYEE_BAJA_TITULO);
-      imprimirEnPantalla(EMPLOYEE_PRINT_MASK_CABECERA);
-      eEmployee_print(unEmpleado);
-
-      confirmacion = pedirConfirmacion(EMPLOYEE_MSJ_CONFIRMAR_BAJA);
-
-      if(confirmacion == 'S')
+      if(!eEmployee_informarListadoVacio(this))
       {
-         eEmployee_setIsEmpty(unEmpleado, EMPLOYEE_EMPTY);
-         imprimirEnPantalla(EMPLOYEE_MSJ_BAJA_OK);
+         returnAux = SIN_ERROR;
+
+         unEmpleado = eEmployee_searchById(this);
+
+         limpiarPantallaYMostrarTitulo(EMPLOYEE_BAJA_TITULO);
+
+         imprimirEnPantalla(EMPLOYEE_PRINT_MASK_CABECERA);
+         eEmployee_print(unEmpleado);
+
+         confirmacion = pedirConfirmacion(EMPLOYEE_MSJ_CONFIRMAR_BAJA);
+
+         if(confirmacion == 'S')
+         {
+            eEmployee_setIsEmpty(unEmpleado, EMPLOYEE_EMPTY);
+            imprimirEnPantalla(EMPLOYEE_MSJ_BAJA_OK);
+         }
+         else
+         {
+            imprimirEnPantalla(MSJ_CANCELO_GESTION);
+         }
       }
-      else
-      {
-         imprimirEnPantalla(MSJ_CANCELO_GESTION);
-      }
+
    }
-
    pausa();
-   return id;
+   return returnAux;
 }
 //-----------------------------------------------------------------------------------------------//
 
@@ -408,6 +428,7 @@ void eEmployee_gestionListar(ArrayList* this)
    {
       eEmployee_printList(this, EMPLOYEE_PRINT_PAGESIZE);
    }
+   printf(EMPLOYEE_LISTADO_RECUENTO,al_len(this));
    pausa();
 }
 //-----------------------------------------------------------------------------------------------//
@@ -450,11 +471,11 @@ int eEmployee_compareByLastName(void* pEmployeeA,void* pEmployeeB)
 //-----------------------------------------------------------------------------------------------//
 int eEmployee_sort(ArrayList* this)
 {
-   int returnAux = -1;
+   int returnAux = VERIFICAR_PUNTEROS;
 
    if(this!=NULL)
    {
-      returnAux = 0;
+      returnAux = SIN_ERROR;
       al_sort(this, eEmployee_compareByName, EMPLOYEE_ORDEN_ASC);
    }
 

@@ -47,10 +47,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="General.h" />
-		<Unit filename="ManejoError.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="ManejoError.h" />
 		<Unit filename="Menu.c">
 			<Option compilerVar="CC" />
 		</Unit>

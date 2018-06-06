@@ -12,7 +12,7 @@
 #include <stdlib.h>
 
 /**************************** CONSTANTES *********************************************************/
-#define EMPLOYEE_EMPTY 1
+#define VERIFICAR_PUNTEROS -1
 #define EMPLOYEE_OCCUPIED 0
 #define TRUE "true"
 #define FALSE "false"
